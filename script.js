@@ -1,4 +1,5 @@
 let grid = document.querySelector(".pad");
+let buttons = document.querySelectorAll('.btn')
 let mouseDown = false;
 let gridSize = 16;
 let mod = 0;
@@ -35,12 +36,13 @@ document.querySelector(".newGrid").addEventListener('click', () => {
   do gridSize = prompt("Enter new grid size"); while (isNaN(gridSize));
   if (grid) grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
   while (grid.firstElementChild) grid.firstElementChild.remove();
-  mod = 1;
   gridGen(gridSize);
 });
 
-document.querySelector(".default").addEventListener('click', () => { mod = 0 });
-document.querySelector(".eraser").addEventListener('click', () => { mod = 1 });
-document.querySelector(".rainbow").addEventListener('click', () => { mod = 2 });
-document.querySelector(".color").addEventListener('click', () => { mod = 3 });
+buttons.forEach(btn => {
+  btn.addEventListener('click', event => {
+    mod = btn.id;
+  });
+});
+
 gridGen();
