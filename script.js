@@ -27,11 +27,9 @@ function gridGen() {
 }
 
 document.querySelector(".newGrid").addEventListener('click', () => {
-  gridSize = prompt("Enter new grid size");
-  grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-  while (grid.firstElementChild) {
-    grid.firstElementChild.remove();
-  }
+  do gridSize = prompt("Enter new grid size"); while (isNaN(gridSize));
+  if (grid) grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+  while (grid.firstElementChild) grid.firstElementChild.remove();
   gridGen(gridSize);
 });
 
