@@ -23,6 +23,8 @@ function gridGen() {
           if (mod == 0) cell.style.background = "#3C9EE7";
           else if (mod == 1) cell.style.background = "whitesmoke";
           else if (mod == 2) cell.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+          else if (mod == 3) cell.style.background = document.querySelector(".color").value;
+          else return;
         });
       grid.appendChild(cell);
     }
@@ -40,4 +42,5 @@ document.querySelector(".newGrid").addEventListener('click', () => {
 document.querySelector(".default").addEventListener('click', () => { mod = 0 });
 document.querySelector(".eraser").addEventListener('click', () => { mod = 1 });
 document.querySelector(".rainbow").addEventListener('click', () => { mod = 2 });
+document.querySelector(".color").addEventListener('click', () => { mod = 3 });
 gridGen();
