@@ -21,8 +21,16 @@ function gridGen() {
       cell.addEventListener(
         "mouseover", function () {
           if (!mouseDown) return;
-          if (mod == 0) cell.style.background = "#3C9EE7";
-          else if (mod == 1) cell.style.background = "whitesmoke";
+          if (mod == 0) {
+            if (cell.style.backgroundColor == "") cell.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+            else {
+              let currentArr = cell.style.backgroundColor.split(",");
+              let current = currentArr[3].slice(1, 4);
+              let added = `${Number(current) + 0.1}`;
+              cell.style.backgroundColor = `rgba(0, 0, 0, ${added})`;
+            }
+          }
+          else if (mod == 1) cell.style.background = "#f5f5f5";
           else if (mod == 2) cell.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
           else if (mod == 3) cell.style.background = document.querySelector(".color").value;
           else return;
