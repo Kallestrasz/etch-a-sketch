@@ -18,30 +18,22 @@ function gridGen() {
     for (let j = 0; j < gridSize; j++) {
       let cell = document.createElement("div");
       cell.classList.add('cell');
-      cell.addEventListener(
-        "mouseover", function () {
-          if (!mouseDown) return;
-          if (mod == 0) {
-            if (cell.style.backgroundColor == "") cell.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
-            else {
-              let currentArr = cell.style.backgroundColor.split(",");
-              let current = currentArr[3].slice(1, 4);
-              let added = `${Number(current) + 0.1}`;
-              cell.style.backgroundColor = `rgba(0, 0, 0, ${added})`;
-            }
-          }
-          else if (mod == 1) cell.style.background = "#f5f5f5";
-          else if (mod == 2) cell.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
-          else if (mod == 3) cell.style.background = document.querySelector(".color").value;
-          else return;
-        });
+      cell.style.background = "rgba(245, 245, 245, 1)";
+      cell.addEventListener("mouseover", () => {
+        if (!mouseDown) return;
+        if (mod == 0) cell.style.background = "rgb(0, 0, 0)";
+        else if (mod == 1) cell.style.background = "";
+        else if (mod == 2) cell.style.background = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+        else if (mod == 3) cell.style.background = document.querySelector(".color").value;
+        else return;
+      });
       grid.appendChild(cell);
     }
   }
 }
 
 document.querySelector(".newGrid").addEventListener('click', () => {
-  do gridSize = prompt("Enter new grid size"); while (isNaN(gridSize) || gridSize > 128);
+  do gridSize = prompt("Enter new grid size"); while (isNaN(gridSize) || gridSize > 128 || gridSize <= 0);
   if (grid) grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
   while (grid.firstElementChild) grid.firstElementChild.remove();
   gridGen(gridSize);
